@@ -22,9 +22,10 @@ router.get('/:id',(request,response,next)=>{
 });
 
 router.post('/',(request,response,next)=>{
-    const {course_id,course_title,course_credit,course_contact_period} = request.body;
-    pool.query('INSERT INTO course(course_id,course_title,course_credit,course_contact_period) VALUES ($1,$2,$3,$4)',
-    [course_id,course_title,course_credit,course_contact_period],
+    const {course_id,course_title,course_credit,course_contact_period,course_semester,course_branch,course_islab,course_iscontinous,course_staff_id} = request.body;
+    // console.log(course_id,course_title,course_credit,course_contact_period,course_semester,course_branch,course_islab,course_iscontinous,course_staff_id);
+    pool.query('INSERT INTO course(course_id,course_title,course_credit,course_contact_period,course_semester,course_branch,course_islab,course_iscontinous,course_staff_id) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)',
+    [course_id,course_title,course_credit,course_contact_period,course_semester,course_branch,course_islab,course_iscontinous,course_staff_id],
     (err,res)=>{
         if(err) return next(err);
         response.redirect('/course');
@@ -34,7 +35,7 @@ router.post('/',(request,response,next)=>{
 router.put('/:id',(request,response,next)=>{
     const {id}=request.params;
     const uId = id.toLocaleUpperCase();
-    const keys=['course_id','course_title','course_credit','course_contact_period'];
+    const keys=['course_id','course_title','course_credit','course_contact_period','course_semester','course_branch','course_islab','course_iscontinous','course_staff_id'];
     const fields=[];
 
     keys.forEach(key => {
