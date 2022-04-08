@@ -134,25 +134,25 @@ COPY public.admin (login_id, email_address, password) FROM stdin;
 -- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: dharani
 --
 
-COPY public.course (course_id, course_title, course_credit, course_contact_period, course_semester, course_branch, course_islab, course_iscontinous, course_staff_id) FROM stdin;
-XC7771	MATHEMATICS 1	4	4	5	IT	f	f	4
-XC7351	SOFTWARE ENGINEERING	4	4	6	IT	f	f	1
-XC7551	DATA STRUCTURES LAB	2	4	3	CS	t	t	6
-\.
+-- COPY public.course (course_id, course_title, course_credit, course_contact_period, course_semester, course_branch, course_islab, course_iscontinous, course_staff_id) FROM stdin;
+-- XC7771	MATHEMATICS 1	4	4	5	IT	f	f	4
+-- XC7351	SOFTWARE ENGINEERING	4	4	6	IT	f	f	1
+-- XC7551	DATA STRUCTURES LAB	2	4	3	CS	t	t	6
+-- \.
 
 
 --
 -- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: dharani
 --
 
-COPY public.staff (staff_id, staff_name, staff_category, staff_designation) FROM stdin;
-1	staff1	CS	Teaching fellow
-2	Staff2	Maths	Professor
-3	Staff3	CS	Teaching fellow
-4	Staff4	Maths	Teaching fellow
-5	Staff5	CS	Teaching fellow
-6	Staff6	Maths	Professor
-\.
+-- COPY public.staff (staff_id, staff_name, staff_category, staff_designation) FROM stdin;
+-- 1	staff1	CS	Teaching fellow
+-- 2	Staff2	Maths	Professor
+-- 3	Staff3	CS	Teaching fellow
+-- 4	Staff4	Maths	Teaching fellow
+-- 5	Staff5	CS	Teaching fellow
+-- 6	Staff6	Maths	Professor
+-- \.
 
 
 --
