@@ -19,26 +19,27 @@ router.get('/:id',(request,response,next)=>{
 });
 
 router.post('/',(request,response,next)=>{
-    const {staff_name,staff_category,staff_skill} = request.body;
-    console.log(request.body)
-    pool.query('INSERT INTO staff(staff_name,staff_category,staff_skill) VALUES ($1, $2, $3)',
-    [staff_name,staff_category,staff_skill],
-    console.log(staff_name,staff_category,staff_skill),
+    const {staff_name,staff_category,staff_designation} = request.body;
+    // console.log(request.body)
+    pool.query('INSERT INTO staff(staff_name,staff_category,staff_designation) VALUES ($1, $2, $3)',
+    [staff_name,staff_category,staff_designation],
+    // console.log(staff_name,staff_category,staff_designation),
     (err,res)=>{
         if(err) return next(err);
+        // response.json(res.rows)
         response.redirect('/staff');
     });
 });
 
 router.put('/:id',(request,response,next)=>{
     const {id}=request.params;
-    const keys=['staff_name','staff_category','staff_skill'];
+    const keys=['staff_name','staff_category','staff_designation'];
     const fields=[];
 
     keys.forEach(key =>{
         if(request.body[key]) fields.push(key);
     });
-    console.log(fields);
+    // console.log(fields);
     fields.forEach((field,index)=>{
         pool.query(`UPDATE staff SET ${field}=$1 WHERE staff_id=($2)`,[request.body[field],id],
         (err,res)=>{

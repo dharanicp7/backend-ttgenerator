@@ -1,6 +1,7 @@
 const {Pool} = require('pg');
+// const {Connection, Request} = require('tedious');
 
-const {user,host,database,password,port} = require('../secrets/db_configuration');
+const {user,host,database,password,port}  = require('../secrets/db_configuration');
 
 const pool = new Pool({user,host,database,password,port});
 
@@ -10,3 +11,5 @@ const pool = new Pool({user,host,database,password,port});
 // });
 
 module.exports = pool;
+
+// host=myddemoserver.postgres.database.azure.com port=5432 dbname={your_database} user=dharani@myddemoserver password={your_password} sslmode=require

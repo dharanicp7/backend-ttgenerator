@@ -4,7 +4,7 @@
   "description": "Time-table generator.",
   "main": "index.js",
   "scripts": {
-    "configure":"bin/configuredb.sh",
+    "configure": "bin/configuredb.sh",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www"
@@ -15,6 +15,7 @@
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
-    "pg": "^8.7.3"
+    "pg": "^8.7.3",
+    "tedious": "^14.4.0"
   }
 }

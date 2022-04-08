@@ -11,6 +11,16 @@ router.get('/',(request,response,next)=>{
     });
 });
 
+router.get('/no/:semNo',(request,response,next)=>{
+    const {semNo} = request.params;
+    // console.log(semNo);
+    pool.query('SELECT * FROM course FULL OUTER JOIN staff ON course.course_staff_id = staff_id WHERE course_semester= $1',[semNo],
+    (err,res)=>{
+        if(err) return next(err);
+        response.json(res.rows);
+    });
+});
+
 router.get('/staff',(request,response,next)=>{
     pool.query('SELECT * FROM course INNER JOIN staff ON course.course_staff_id = staff_id',
     (err,res)=>{
