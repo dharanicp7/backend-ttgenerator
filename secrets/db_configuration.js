@@ -1,8 +1,8 @@
 module.exports={
-    user:'dharani@myddemoserver',
-    host:'myddemoserver.postgres.database.azure.com',
-    database:'ttgeneratordb',
-    password:'Kiran@123',
+    user:'zljvsqywsvjezd',
+    host:'ec2-3-218-171-44.compute-1.amazonaws.com',
+    database:'d28ualjaj4jnn6',
+    password:'c86bba640895339b907ff8001e20d7502caaf51a6e3e5309a2bc74adc22051f5',
     port:5432
 };
 
