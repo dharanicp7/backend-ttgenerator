@@ -18,6 +18,10 @@ app.use((err,req,res,next)=>{
     res.json(err);
 });
 
+app.get('/',(request,response,next)=>{
+    response.send("Back-end APIs of Time Table generator");
+});
+
 // const port = 3000;
 // app.listen(port,()=>console.log(`Listening at port : ${port}`));
 
