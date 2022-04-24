@@ -5,7 +5,7 @@ const router = Router();
 
 router.get('/',(request,response,next)=>{
     pool.query('SELECT * FROM course',(err,res)=>{
-        // console.log(res);
+        console.log(res);
         if(err) return next(err);
         response.json(res.rows);
     });

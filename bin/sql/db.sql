@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 11.12
+-- Dumped from database version 13.4
 -- Dumped by pg_dump version 13.4
 
 SET statement_timeout = 0;
@@ -18,8 +18,10 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
+SET default_table_access_method = heap;
+
 --
--- Name: admin; Type: TABLE; Schema: public; Owner: dharani
+-- Name: admin; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.admin (
@@ -29,10 +31,10 @@ CREATE TABLE public.admin (
 );
 
 
-ALTER TABLE public.admin OWNER TO dharani;
+ALTER TABLE public.admin OWNER TO postgres;
 
 --
--- Name: admin_login_id_seq; Type: SEQUENCE; Schema: public; Owner: dharani
+-- Name: admin_login_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.admin_login_id_seq
@@ -44,17 +46,17 @@ CREATE SEQUENCE public.admin_login_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.admin_login_id_seq OWNER TO dharani;
+ALTER TABLE public.admin_login_id_seq OWNER TO postgres;
 
 --
--- Name: admin_login_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dharani
+-- Name: admin_login_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
 ALTER SEQUENCE public.admin_login_id_seq OWNED BY public.admin.login_id;
 
 
 --
--- Name: course; Type: TABLE; Schema: public; Owner: dharani
+-- Name: course; Type: TABLE; Schema: public; Owner: bc_user
 --
 
 CREATE TABLE public.course (
@@ -70,24 +72,28 @@ CREATE TABLE public.course (
 );
 
 
-ALTER TABLE public.course OWNER TO dharani;
+ALTER TABLE public.course OWNER TO bc_user;
 
 --
--- Name: staff; Type: TABLE; Schema: public; Owner: dharani
+-- Name: staff; Type: TABLE; Schema: public; Owner: bc_user
 --
 
 CREATE TABLE public.staff (
     staff_id integer NOT NULL,
     staff_name character varying(50),
     staff_category character varying(50),
-    staff_designation character varying(200)
+    staff_designation character varying(200),
+    staff_expertise character varying,
+    staff_qualification character varying,
+    staff_email_address character varying,
+    staff_phone integer
 );
 
 
-ALTER TABLE public.staff OWNER TO dharani;
+ALTER TABLE public.staff OWNER TO bc_user;
 
 --
--- Name: staff_staff_id_seq; Type: SEQUENCE; Schema: public; Owner: dharani
+-- Name: staff_staff_id_seq; Type: SEQUENCE; Schema: public; Owner: bc_user
 --
 
 CREATE SEQUENCE public.staff_staff_id_seq
@@ -99,78 +105,80 @@ CREATE SEQUENCE public.staff_staff_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.staff_staff_id_seq OWNER TO dharani;
+ALTER TABLE public.staff_staff_id_seq OWNER TO bc_user;
 
 --
--- Name: staff_staff_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dharani
+-- Name: staff_staff_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: bc_user
 --
 
 ALTER SEQUENCE public.staff_staff_id_seq OWNED BY public.staff.staff_id;
 
 
 --
--- Name: admin login_id; Type: DEFAULT; Schema: public; Owner: dharani
+-- Name: admin login_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.admin ALTER COLUMN login_id SET DEFAULT nextval('public.admin_login_id_seq'::regclass);
 
 
 --
--- Name: staff staff_id; Type: DEFAULT; Schema: public; Owner: dharani
+-- Name: staff staff_id; Type: DEFAULT; Schema: public; Owner: bc_user
 --
 
 ALTER TABLE ONLY public.staff ALTER COLUMN staff_id SET DEFAULT nextval('public.staff_staff_id_seq'::regclass);
 
 
 --
--- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: dharani
+-- Data for Name: admin; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.admin (login_id, email_address, password) FROM stdin;
-\.
+-- COPY public.admin (login_id, email_address, password) FROM stdin;
+-- 1	abc@mail.com	12345678
+-- \.
 
 
 --
--- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: dharani
+-- Data for Name: course; Type: TABLE DATA; Schema: public; Owner: bc_user
 --
 
 -- COPY public.course (course_id, course_title, course_credit, course_contact_period, course_semester, course_branch, course_islab, course_iscontinous, course_staff_id) FROM stdin;
--- XC7771	MATHEMATICS 1	4	4	5	IT	f	f	4
--- XC7351	SOFTWARE ENGINEERING	4	4	6	IT	f	f	1
--- XC7551	DATA STRUCTURES LAB	2	4	3	CS	t	t	6
+-- MA7351	Mathematics	4	4	5	IT	f	t	5
+-- XC1234	DATA STRUCTURES LAB	2	4	8	IT/CS	t	f	4
+-- MA4042	SOFTWARE PROJECT MANAGEMENT	4	4	10	IT	f	t	2
+-- MA1234	NUMERICAL METHODS	3	4	10	CS	t	t	1
 -- \.
 
 
 --
--- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: dharani
+-- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: bc_user
 --
 
--- COPY public.staff (staff_id, staff_name, staff_category, staff_designation) FROM stdin;
--- 1	staff1	CS	Teaching fellow
--- 2	Staff2	Maths	Professor
--- 3	Staff3	CS	Teaching fellow
--- 4	Staff4	Maths	Teaching fellow
--- 5	Staff5	CS	Teaching fellow
--- 6	Staff6	Maths	Professor
+-- COPY public.staff (staff_id, staff_name, staff_category, staff_designation, staff_expertise, staff_qualification, staff_email_address, staff_phone) FROM stdin;
+-- 1	Staff1	Computer Science	Computing	\N	\N	\N	\N
+-- 2	Staff2	Mathematics	Numerical,Statistics	\N	\N	\N	\N
+-- 3	Staff3	Computer Science	Cloud Computing	\N	\N	\N	\N
+-- 4	Staff4	Mathematics	Probability	\N	\N	\N	\N
+-- 5	Staff 5	Mathematics	Algebra	\N	\N	\N	\N
+-- 6	Staff 6	Computer science	python	\N	\N	\N	\N
 -- \.
 
 
 --
--- Name: admin_login_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dharani
+-- Name: admin_login_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.admin_login_id_seq', 1, false);
+SELECT pg_catalog.setval('public.admin_login_id_seq', 1, true);
 
 
 --
--- Name: staff_staff_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dharani
+-- Name: staff_staff_id_seq; Type: SEQUENCE SET; Schema: public; Owner: bc_user
 --
 
 SELECT pg_catalog.setval('public.staff_staff_id_seq', 7, true);
 
 
 --
--- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: dharani
+-- Name: admin admin_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.admin
@@ -178,7 +186,7 @@ ALTER TABLE ONLY public.admin
 
 
 --
--- Name: course course_pkey; Type: CONSTRAINT; Schema: public; Owner: dharani
+-- Name: course course_pkey; Type: CONSTRAINT; Schema: public; Owner: bc_user
 --
 
 ALTER TABLE ONLY public.course
@@ -186,7 +194,7 @@ ALTER TABLE ONLY public.course
 
 
 --
--- Name: staff staff_pkey; Type: CONSTRAINT; Schema: public; Owner: dharani
+-- Name: staff staff_pkey; Type: CONSTRAINT; Schema: public; Owner: bc_user
 --
 
 ALTER TABLE ONLY public.staff
@@ -194,7 +202,7 @@ ALTER TABLE ONLY public.staff
 
 
 --
--- Name: course course_course_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: dharani
+-- Name: course course_course_staff_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: bc_user
 --
 
 ALTER TABLE ONLY public.course
